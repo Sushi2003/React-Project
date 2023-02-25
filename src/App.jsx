@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import {resolveBaseUrl} from "vite";
-import {useState} from "react";
+
 
 const App = ()=> {
     const [todo,setTodo]=useState("");
@@ -13,6 +13,12 @@ const App = ()=> {
             setTodo("");
         }
     };
+    const deleteTodo = (text) => {
+        const newTodos = todos.filter((todo)=>{
+            return todo !==text;
+        });
+        setTodos(newTodos)
+    }
 
 
     return (
@@ -24,6 +30,15 @@ const App = ()=> {
                 setTodo(e.target.value);}  }
                 />
                 <button className="add-button" onClick={addTodo}>Add</button>
+                <ul className="todo-list">
+                    {todos.map((todo,index)=>(
+                        <div className="todo">
+                            <li key={index}>{todo}</li>
+                            <button className="delete-button" onClick={deleteTodo}>Delete</button>
+                        </div>
+                    ))
+                    }
+                </ul>
 
             </div>
         </div>
